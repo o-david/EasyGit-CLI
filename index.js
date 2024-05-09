@@ -25,7 +25,8 @@ program
             return true;
           },
         },
-      ]).repo
+      ])
+       .then(({ repo }) => repo);
     }
 
     try {
