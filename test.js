@@ -100,3 +100,31 @@ program
 
 // Parse command line arguments
 program.parse(process.argv);
+
+// // Command to push changes
+// program
+//   .command("push")
+//   .description("Push changes to remote repository")
+//   .action(() => {
+//     git.push((err) => {
+//       if (err) {
+//         console.error("Error pushing changes:", err);
+//         return;
+//       }
+//       console.log("Changes pushed successfully.");
+//     });
+//   });
+
+// // Command to commit changes
+// program
+//   .command("commit <message>")
+//   .description("Commit changes")
+//   .action((message) => {
+//     git.commit(message, (err) => {
+//       if (err) {
+//         console.error("Error committing changes:", err);
+//         return;
+//       }
+//       console.log("Changes committed successfully.");
+//     });
+//   });
