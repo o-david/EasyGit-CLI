@@ -60,6 +60,7 @@ program
 
     const remoteName = "origin";
     const remoteUrl = repo;
+    console.log(remoteUrl);
 
     try {
       await git.addRemote(remoteName, remoteUrl);
