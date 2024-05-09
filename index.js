@@ -25,7 +25,7 @@ program
             return true;
           },
         },
-      ]);
+      ]).repo
     }
 
     try {
