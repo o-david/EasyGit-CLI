@@ -116,20 +116,22 @@ program
             ? `generate a commit message for this diff:${diff} and these new files:${newFiles}. Your response should be an object with the keys of subject and body only` //prompt for diff and newFiles
             : `generate a commit message for this diff:${diff}. Your response should be an object with the keys of subject and body only` //prompt for diff alone
             : `generate a commit message for these new files:${newFiles}your response should be an object with the keys of subject and body only`; //prompt for newFiles alone
-        const commitMessage = model
+        const commitMessage = await model
         .generateContent(prompt)
         .then((result) => {
+            console.log(result.response.text());
             const response = JSON.parse(result.response.text().replace('```', '').replace('json', '').replace('```', '')); // Assuming JSON format
             const subject = response.subject;
             const body = response.body;
-            const commitMessage = {
+            const msg = {
                 subject: subject,
                 body: body,
             };
-        return commitMessage
+        return msg
         })
         .catch((err) => {
           console.error("Error generating commit message:", err);
+          return;
         //   console.error("Prompt used:", prompt);
         });
         try {
@@ -139,9 +141,8 @@ program
             console.error("Error adding files:", err);
             return;
           }
-      
           try {
-            await git.commit(['-m',`${commitMessage.subject}\n\n${commitMessage.body}`]);
+            await git.commit([`${commitMessage.subject}`, `${commitMessage.body}`]);
             console.log("Successfully commited");
           } catch (err) {
             console.error("Error commiting:", err);
