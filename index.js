@@ -168,10 +168,3 @@ program
   });
 // Parse command line arguments
 program.parse(process.argv);
-
-
-
-const generateCommitMessage = async()=>{
-    
-
-}
