@@ -5,6 +5,7 @@ import inquirer from "inquirer";
 import simpleGit from "simple-git";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
+import firstPush from "./commands/first-push.js";
 dotenv.config();
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
@@ -19,79 +20,7 @@ program
   .description(
     "Initialize git, add to staging area, commit and push to remote repo "
   )
-  .action(async (repo) => {
-    if (!repo) {
-      repo = await inquirer
-        .prompt([
-          {
-            type: "input",
-            name: "repo",
-            message: "Enter the repository you wish to push to",
-            validate: (input) => {
-              if (input.trim() === "") {
-                return "Repository URL cannot be empty";
-              }
-              return true;
-            },
-          },
-        ])
-        .then(({ repo }) => repo);
-    }
-
-    try {
-      await git.init();
-      console.log("Initialized empty Git repository.");
-    } catch (err) {
-      console.error("Error initializing Git repository:", err);
-      return;
-    }
-
-    try {
-      await git.add(".");
-      console.log("File(s) added to staging area.");
-    } catch (err) {
-      console.error("Error adding files:", err);
-      return;
-    }
-
-    try {
-      await git.commit(["initial Commit"]);
-      console.log("Successfully commited");
-    } catch (err) {
-      console.error("Error commiting:", err);
-      return;
-    }
-
-    try {
-      await git.branch(["-M", "main"]);
-      console.log("Successfully changed branch to main.");
-    } catch (err) {
-      console.error("Error changing branch to main:", err);
-      return;
-    }
-
-    const remoteName = "origin";
-    const remoteUrl = repo;
-    console.log(remoteUrl);
-
-    try {
-      await git.addRemote(remoteName, remoteUrl);
-      console.log(
-        `Added remote origin "${remoteName}" with URL "${remoteUrl}"`
-      );
-    } catch (err) {
-      console.error(`Error adding remote origin:`, err);
-      return;
-    }
-
-    try {
-      await git.push("origin", "main", ["-u"]);
-      console.log("Changes pushed successfully to remote repository.");
-    } catch (err) {
-      console.error("Error pushing changes to remote repository:", err);
-      return;
-    }
-  });
+  .action(firstPush);
 
 program
   .command("push")
