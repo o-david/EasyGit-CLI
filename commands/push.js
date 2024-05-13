@@ -30,7 +30,7 @@ const push = async(commitMessage) => {
       }
       try {
         await git.commit([commitMessage]);
-        console.log("Successfully commited");
+        console.log("Successfully commited ("+ commitMessage+")");
       } catch (err) {
         console.error("Error commiting:", err);
         return;

@@ -25,7 +25,7 @@ async function push() {
           .generateContent(prompt)
           .then((result) => {
               console.log(result.response.text());
-              const response = JSON.parse(result.response.text().replace('```', '').replace('json', '').replace('```', '')); // Assuming JSON format
+              const response = JSON.parse(result.response.text().replaceAll(/```|json/, '')); // Assuming JSON format
               const subject = response.subject;
               const body = response.body;
               const msg = {
