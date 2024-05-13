@@ -8,7 +8,7 @@ const push = async(commitMessage) => {
         .prompt([
             {
               type: "input",
-              name: "repo",
+              name: "commitMessage",
               message: "Enter a commit message",
               validate: (input) => {
                 if (input.trim() === "") {
