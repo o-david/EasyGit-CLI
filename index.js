@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { program } from "commander";
-import inquirer from "inquirer";
 import simpleGit from "simple-git";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";

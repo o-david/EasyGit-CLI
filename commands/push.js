@@ -1,7 +1,8 @@
 import git from '../utils/git.js';
 import inquirer from "inquirer";
 
-async function push(commitMessage) {
+const push = async(commitMessage) => {
+    console.log(commitMessage);
     if (!commitMessage) {
         commitMessage = await inquirer
         .prompt([
