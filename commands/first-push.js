@@ -1,7 +1,7 @@
 import inquirer from "inquirer";
 import git from "../utils/git.js";
 
-async function firstPush(repo) {
+const firstPush = async(repo) => {
         if (!repo) {
           repo = await inquirer
             .prompt([
