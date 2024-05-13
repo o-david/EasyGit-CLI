@@ -2,7 +2,6 @@ import git from '../utils/git.js';
 import inquirer from "inquirer";
 
 const push = async(commitMessage) => {
-    console.log(commitMessage);
     if (!commitMessage) {
         commitMessage = await inquirer
         .prompt([
@@ -20,7 +19,7 @@ const push = async(commitMessage) => {
           ])
           .then(({ commitMessage }) => commitMessage);
       }
-      console.log(commitMessage.replaceAll(/'|"/g, ''));
+      commitMessage = commitMessage.replaceAll(/'|"/g, '');
     try {
         await git.add(".");
         console.log("File(s) added to staging area.");
