@@ -20,7 +20,7 @@ const push = async(commitMessage) => {
           ])
           .then(({ commitMessage }) => commitMessage);
       }
-      console.log(commitMessage.replaceAll(/ ' | " /gi, ''));
+      console.log(commitMessage.replaceAll(/'|"/g, ''));
     try {
         await git.add(".");
         console.log("File(s) added to staging area.");
