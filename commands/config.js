@@ -13,12 +13,17 @@ const config = async () => {
   if (!username || !email) {
     console.info("Your global Git username or email is not configured.");
     console.log("Would you like to set them now? (recommended)");
-
+  }
+  else{
+    console.info("Your global Git username or email has been configured.");
+    console.log("Would you like to update them now?");
+    
+  }
     const configureCredentials = await inquirer.prompt([
       {
         type: "confirm",
         name: "configure",
-        message: "Configure username and email?",
+        message: "Press Y to configure and N to skip",
         default: true,
       },
     ]);
@@ -41,11 +46,13 @@ const config = async () => {
       await setGlobalConfig("user.name", usernamePrompt.username);
       await setGlobalConfig("user.email", emailPrompt.email);
       console.log("Username and email successfully configured globally.");
+      username=usernamePrompt.username
+      email=emailPrompt.email
     }
-  } else {
+   
     console.log(`Username: ${username}`);
     console.log(`Email: ${email}`);
-  }
+  
 };
 
 export default config;

@@ -1,14 +1,14 @@
 {
   "name": "easygit-cli",
-  "version": "1.1.0",
-  "description": "",
+  "version": "2.1.0",
+  "description": "The EasyGit CLI is a simple command line interface for Git that automates the process of initializing a new Git repository, adding files to the staging area, committing changes, and pushing them to a remote repository.",
   "type": "module",
   "main": "index.js",
   "bin": {
     "easygit": "index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "git",
@@ -36,5 +36,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/o-david/EasyGit-CLI.git"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.24.5",
+    "@babel/register": "^7.23.7",
+    "jest": "^29.7.0"
   }
 }
