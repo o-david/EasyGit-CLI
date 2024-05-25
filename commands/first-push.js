@@ -2,6 +2,7 @@ import inquirer from "inquirer";
 import git from "../utils/git.js";
 
 const firstPush = async (repo) => {
+  // If no repository URL is provided, prompt the user to enter one
   if (!repo) {
     repo = await inquirer
       .prompt([
@@ -19,9 +20,10 @@ const firstPush = async (repo) => {
       ])
       .then(({ repo }) => repo);
   }
-  console.log(repo);
+  console.log(`Using repository URL: ${repo}`);
 
   try {
+    // Initialize an empty Git repository
     await git.init();
     console.log("Initialized empty Git repository.");
   } catch (err) {
@@ -30,6 +32,7 @@ const firstPush = async (repo) => {
   }
 
   try {
+    // Add all files in the current directory to the staging area
     await git.add(".");
     console.log("File(s) added to staging area.");
   } catch (err) {
@@ -38,14 +41,16 @@ const firstPush = async (repo) => {
   }
 
   try {
+    // Create an initial commit with a default message
     await git.commit(["initial Commit"]);
-    console.log("Successfully commited");
+    console.log("Successfully committed");
   } catch (err) {
-    console.error("Error commiting:", err);
+    console.error("Error committing:", err);
     return;
   }
 
   try {
+    // Set the default branch to "main"
     await git.branch(["-M", "main"]);
     console.log("Successfully changed branch to main.");
   } catch (err) {
@@ -53,10 +58,11 @@ const firstPush = async (repo) => {
     return;
   }
 
-  // Check for existing remote origin
+  // Check if a remote origin already exists
   let existingRemote;
   try {
-    existingRemote = await git.remote(["-v"]); // Get verbose remote information
+    // Get verbose remote information to check if a remote origin exists
+    existingRemote = await git.remote(["-v"]);
   } catch (err) {
     // Ignore error if there's no remote yet (assuming `git remote -v` fails)
     console.log("No existing remote found. Creating new remote...");
@@ -67,10 +73,9 @@ const firstPush = async (repo) => {
 
   if (!existingRemote) {
     try {
+      // Add a new remote origin with the provided repository URL
       await git.addRemote(remoteName, remoteUrl);
-      console.log(
-        `Added remote origin "${remoteName}" with URL "${remoteUrl}"`
-      );
+      console.log(`Added remote origin "${remoteName}" with URL "${remoteUrl}"`);
     } catch (err) {
       console.error(`Error adding remote origin:`, err);
       return;
@@ -79,6 +84,7 @@ const firstPush = async (repo) => {
     console.log("Using existing remote origin:", existingRemote);
   }
 
+  // Push the changes to the remote repository and set the upstream tracking information
   try {
     await git.push("origin", "main", ["-u"]);
     console.log("Changes pushed successfully to remote repository.");
