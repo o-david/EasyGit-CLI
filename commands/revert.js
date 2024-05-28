@@ -7,7 +7,7 @@ import path from "node:path";
 import globalModules from "global-modules";
 
 // Define the path to the config file
-const configFile = path.join(globalModules, "git-cli/utils/config.json");
+const configFile = path.join(globalModules, "easygit-cli/utils/config.json");
 
 // Read the config file and parse its contents
 const data = fs.readFileSync(`${configFile}`, "utf-8");
