@@ -1,6 +1,9 @@
 // Import required modules
 import git from "../utils/git.js";
 import inquirer from "inquirer";
+import ora from "ora";
+import chalk from "chalk";
+
 
 // Define the push function
 const push = async (commitMessage) => {
@@ -60,9 +63,9 @@ const push = async (commitMessage) => {
 
     // Push the changes to the remote repository
     try {
-      console.log("Pushing changes to remote repository...");
+      const spinner = ora('Pushing changes to remote repository...').start(); // Start the spinner      
       await git.push();
-      console.log("Changes pushed successfully to remote repository.");
+      spinner.succeed(chalk.green("Done! Changes pushed successfully to remote repository."));
     } catch (err) {
       console.error("Error pushing changes to remote repository:", err);
       return;

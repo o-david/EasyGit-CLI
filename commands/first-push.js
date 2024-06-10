@@ -1,5 +1,8 @@
 import inquirer from "inquirer";
 import git from "../utils/git.js";
+import ora from "ora";
+import chalk from "chalk";
+
 
 const firstPush = async (repo) => {
   // If no repository URL is provided, prompt the user to enter one
@@ -86,8 +89,9 @@ const firstPush = async (repo) => {
 
   // Push the changes to the remote repository and set the upstream tracking information
   try {
+    const spinner = ora('Pushing changes to remote repository...').start(); // Start the spinner      
     await git.push("origin", "main", ["-u"]);
-    console.log("Changes pushed successfully to remote repository.");
+    spinner.succeed(chalk.green("Done! Changes pushed successfully to remote repository."));
   } catch (err) {
     console.error("Error pushing changes to remote repository:", err);
     return;

@@ -1,4 +1,4 @@
-# EastGit CLI
+# EasyGit CLI
 
 ```bash
 npm install -g easygit-cli
@@ -57,6 +57,9 @@ easygit push [commitMessage]
 * `commitMessage`: Optional. The commit message. If not provided, you will be prompted to enter a commit message.
 
 ### Example
+```bash
+easygit push "refactored index file"
+```
 ```bash
 easygit push
 ```
