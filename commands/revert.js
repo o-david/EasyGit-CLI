@@ -5,6 +5,7 @@ import colors from "colors";
 import fs from "node:fs";
 import path from "node:path";
 import globalModules from "global-modules";
+import { updateVersion } from "../utils/checkVersion.js";
 
 // Define the path to the config file
 const configFile = path.join(globalModules, "easygit-cli/utils/config.json");
@@ -15,6 +16,7 @@ const config = JSON.parse(data);
 
 // Define the revert function
 const revert = async () => {
+  updateVersion()
   // Get the current branch
   let currentBranch;
   try {

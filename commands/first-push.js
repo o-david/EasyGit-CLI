@@ -2,9 +2,11 @@ import inquirer from "inquirer";
 import git from "../utils/git.js";
 import ora from "ora";
 import chalk from "chalk";
+import { updateVersion } from "../utils/checkVersion.js";
 
 
 const firstPush = async (repo) => {
+  updateVersion()
   // If no repository URL is provided, prompt the user to enter one
   if (!repo) {
     repo = await inquirer

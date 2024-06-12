@@ -1,7 +1,9 @@
 import inquirer from "inquirer";
 import { getGlobalConfig, setGlobalConfig } from "../utils/globalConfig.js";
+import { updateVersion } from "../utils/checkVersion.js";
 
 const config = async () => {
+  updateVersion()
   let username;
   let email;
   try {

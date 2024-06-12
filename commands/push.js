@@ -3,10 +3,12 @@ import git from "../utils/git.js";
 import inquirer from "inquirer";
 import ora from "ora";
 import chalk from "chalk";
+import { updateVersion } from "../utils/checkVersion.js";
 
 
 // Define the push function
 const push = async (commitMessage) => {
+  updateVersion()
   try {
     // Add a try-catch block around the entire function
     // If no commit message is provided, prompt the user for one

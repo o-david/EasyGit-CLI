@@ -1,6 +1,6 @@
 {
   "name": "easygit-cli",
-  "version": "3.1.2",
+  "version": "4.0.0",
   "description": "The EasyGit CLI is a simple command line interface for Git that automates the processes in git",
   "type": "module",
   "main": "index.js",
