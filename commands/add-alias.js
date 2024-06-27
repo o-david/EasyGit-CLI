@@ -60,11 +60,11 @@ const addAlias = async (alias, command) => {
     } else {
       // If alias or command is provided, validate them
       if (reservedNames.includes(alias)) {
-        console.log(`Cannot use already existing alias Name or reserved name ${input} as Alias \n Here is a list of reserved names: ${reservedNames}`);
+        console.log(`Cannot use already existing alias Name or reserved name ${alias} as Alias \n Here is a list of reserved names: ${reservedNames}`);
         return;
       }
       if (!(commands.includes(alias))) {
-        console.log(`Command ${input} does not exist\n Here is a list of commands: ${commands}`);
+        console.log(`Command ${alias} does not exist\n Here is a list of commands: ${commands}`);
         return;
       }
       
